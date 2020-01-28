@@ -7,21 +7,25 @@
 //
 
 import Cocoa
+import RxSwift
 
 class ViewController: NSViewController {
+    let const = MusicTool.Const()
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        fetchMusicList()
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    private func fetchMusicList() {
+        MusicTool.shared.searchMusicOf(author: "邓紫棋", page: 1, count: 40)
+            .subscribe({ (infos) in
+                infos.element?.forEach({ (info) in
+                    MusicTool.shared.downloadMusic(id: info.id, name: info.name)
+                })
+            })
+            .disposed(by: disposeBag)
     }
-
-
 }
 
