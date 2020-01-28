@@ -31,7 +31,7 @@ enum MusicID: Int64 {
 
 输出：
 
-![](/Users/yuanping/HusterYP/Code/MusicList/Pic/MusicList.png)
+![](../Pic/MusicList.png)
 
 ### 二. 获取音乐下载链接
 
@@ -60,7 +60,7 @@ MusicTool.shared.searchMusicOf(author: "邓紫棋", page: 1, count: 40)
 
 输出：
 
-![](/Users/yuanping/HusterYP/Code/MusicList/Pic/MusicSearch.png)
+![](../Pic/MusicSearch.png)
 
 ### 四. 音乐下载
 
