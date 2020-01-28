@@ -29,6 +29,10 @@ enum MusicID: Int64 {
 }
 ```
 
+输出：
+
+![](/Users/yuanping/HusterYP/Code/MusicList/Pic/MusicList.png)
+
 ### 二. 获取音乐下载链接
 
 ```
