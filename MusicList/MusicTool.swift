@@ -18,9 +18,9 @@ class MusicTool {
     private let disposeBag = DisposeBag()
     private let musicSource: String = MusicSource.netease.rawValue
 
-    public func allMusicListOf(id: Int64) -> Observable<[MusicInfo]> {
+    public func allMusicListOf(id: MusicID) -> Observable<[MusicInfo]> {
         let params: Parameters = ["types": "playlist",
-                                  "id": id]
+                                  "id": id.rawValue]
         return Observable<[MusicInfo]>.create { [weak self] (observer) -> Disposable in
             guard let `self` = self else { return Disposables.create() }
             Alamofire.request(self.const.baseUrl,
@@ -138,19 +138,5 @@ extension MusicTool {
 extension MusicTool {
     struct Const {
         let baseUrl = "http://www.gequdaquan.net/gqss/api.php"
-        let basePath = "/Users/yuanping/Downloads/Music"
-        let ids = ID()
-    }
-
-    struct ID {
-        let cloudHot: Int64 = 3778678 // 云音乐热歌榜
-        let ticTocHot: Int64 = 2248307886 // 抖音热歌
-        let cloudNew: Int64 = 3779629 // 云音乐新歌榜
-        let chineseHot: Int64 = 4395559 // 华语金曲榜
-        let chinaTopOfInner: Int64 = 64016 // 中国TOP排行榜（内地榜）
-        let chinaTopOfHKT: Int64 = 112504 // 中国TOP排行榜（港台榜）
-        let cloudSoar: Int64 = 19723756 // 云音乐飙升榜
-        let cloudOrigin: Int64 = 2884035 // 网易原创歌曲榜
-        let classicOld: Int64 = 440103454 // 经典怀旧
     }
 }
