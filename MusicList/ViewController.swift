@@ -19,13 +19,7 @@ class ViewController: NSViewController {
     }
 
     private func fetchMusicList() {
-        MusicTool.shared.searchMusicOf(author: "邓紫棋", page: 1, count: 40)
-            .subscribe({ (infos) in
-                infos.element?.forEach({ (info) in
-                    MusicTool.shared.downloadMusic(id: info.id, name: info.name)
-                })
-            })
-            .disposed(by: disposeBag)
+        MusicTool.shared.register()
     }
 }
 

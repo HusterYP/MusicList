@@ -110,6 +110,53 @@ class MusicTool {
                 self.downloadMusic(url: url.element ?? "", name: name)
         }.disposed(by: disposeBag)
     }
+
+    public func login() {
+        Observable<JSON>.create { [weak self](observer) -> Disposable in
+            guard let `self` = self else { return Disposables.create() }
+            let params: Parameters = ["username": "320960546@qq.com",
+                                      "password": "xxxxx"]
+            Alamofire.request(self.const.loginUrl,
+                              method: .post,
+                              parameters: params,
+                              encoding: JSONEncoding.default)
+                .responseJSON { (response) in
+                    switch response.result {
+                    case .success(let result):
+                        let json = JSON(result)
+                        observer.onNext(json)
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+            }
+            return Disposables.create()
+        }.subscribe { (data) in
+            print(data)
+        }.disposed(by: disposeBag)
+    }
+
+    public func register() {
+        Observable<JSON>.create { [weak self](observer) -> Disposable in
+            guard let `self` = self else { return Disposables.create() }
+            let params: Parameters = ["username": "320960546@qq.com",
+                                      "password": "xxxx"]
+            Alamofire.request(self.const.registerUrl,
+                              method: .post,
+                              parameters: params,
+                              encoding: JSONEncoding.default)
+                .responseJSON { (response) in
+                    switch response.result {
+                    case .success(let data):
+                        observer.onNext(JSON(data))
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+            }
+            return Disposables.create()
+        }.subscribe({ (data) in
+            print(data)
+        }).disposed(by: disposeBag)
+    }
 }
 
 extension MusicTool {
@@ -138,5 +185,7 @@ extension MusicTool {
 extension MusicTool {
     struct Const {
         let baseUrl = "http://www.gequdaquan.net/gqss/api.php"
+        let loginUrl = "http://www.gequdaquan.net:8081/api/user/login"
+        let registerUrl = "http://www.gequdaquan.net:8081/api/user/register"
     }
 }
